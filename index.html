@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Agentic & Agent-Adjacent AI Patterns</title>
+  <title>Agentic & AI Agents Systems Patterns</title>
 
   <!-- Template CSS (keep the template structure) -->
   <link rel="stylesheet" href="static/css/bulma.min.css" />
@@ -15,7 +15,7 @@
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop has-text-centered">
-        <h1 class="title is-1 publication-title">Agentic & Agent-Adjacent AI Patterns</h1>
+        <h1 class="title is-1 publication-title">Agentic & AI Agents Systems Patterns</h1>
 
         <div class="is-size-5 publication-authors" style="margin-top: 0.75rem;">
           <span class="author-block">A lightweight catalogue of repositories and pattern categories</span>
@@ -33,8 +33,8 @@
             </a>
           </span>
           <span class="link-block">
-            <a class="external-link button is-normal is-rounded is-dark" href="#adjacent">
-              <span>Agent-adjacent</span>
+            <a class="external-link button is-normal is-rounded is-dark" href="#aiagents">
+              <span>AI Agents</span>
             </a>
           </span>
           <span class="link-block">
@@ -69,7 +69,7 @@
 
         <div class="buttons" style="margin-top: 1rem;">
           <a class="button is-link is-light" href="#agentic">Agentic AI repositories</a>
-          <a class="button is-link is-light" href="#adjacent">Agent-adjacent AI repositories</a>
+          <a class="button is-link is-light" href="#aiagents">AI Agents Systems repositories</a>
           <a class="button is-link is-light" href="#patterns">Pattern Categorization</a>
         </div>
       </div>
@@ -97,10 +97,10 @@
     </div>
   </section>
 
-  <section class="section" id="adjacent">
+  <section class="section" id="aiagents">
     <div class="container is-max-desktop">
       <div class="content">
-        <h2 class="title is-3">Agent-adjacent AI repositories</h2>
+        <h2 class="title is-3">t AI Agents repositories</h2>
         <div class="table-container">
           <table class="table is-striped is-hoverable is-fullwidth">
             <thead>
@@ -111,7 +111,7 @@
                 <th>Repo Description</th>
               </tr>
             </thead>
-            <tbody id="adjacent-tbody"></tbody>
+            <tbody id="aiagents-tbody"></tbody>
           </table>
         </div>
       </div>
@@ -149,7 +149,6 @@
 
   <script>
     // Data ported from your current Jekyll _data/*.yml files.
-    // Source: AgenticAIPatterns.github.io (_data/agentic.yml and _data/adjacent.yml)
    const agenticData = [
      { repo: "https://github.com/google-gemini/gemini-cli", extraction: "GitHub", paper: "", description: ["Open-source AI agent that brings Google's Gemini model into your terminal."] },
      { repo: "https://github.com/browser-use/browser-use", extraction: "GitHub", paper: "", description: ["It is a library designed specifically to let AI agents control and automate web browsers using LLMs."] },
@@ -186,41 +185,41 @@
      { repo: "https://github.com/mastra-ai/mastra", extraction: "GitHub", paper: "", description: ["Tutorials on building LLM based Agents."] },
      { repo: "https://github.com/simstudioai/sim", extraction: "GitHub", paper: "", description: ["Open-source platform to build and deploy AI agent workflows."] },
      { repo: "https://github.com/agiresearch/OpenAGI", extraction: "Backward Snowballing", paper: "OpenAGI: When LLM Meets Domain Experts", description: "open-source AGI research and development platform" },
-     { repo: "https://github.com/Significant-Gravitas/AutoGPT", extraction: "Backward Snowballing", paper: "No", description: "A platform that allows  to create, deploy, and manage autonomous AI agents" },
-     { repo: "https://github.com/camel-ai/camel", extraction: "Backward Snowballing", paper: "", description: "The framework enables multi-agent systems to collaborate and solve tasks autonomously" },
-     { repo: "https://github.com/Codium-ai/AlphaCodium", extraction: "Backward Snowballing", paper: "", description: "a test-based, multi-stage, code-oriented iterative agentic system" },
-     { repo: "https://github.com/CraftJarvis/MC-Planner", extraction: "Backward Snowballing", paper: "", description: "an agentic AI system, that performs autonomous planning in Minecraft environments" },
-     { repo: "https://github.com/FoundationAgents/MetaGPT", extraction: "Backward Snowballing", paper: "", description: "The Multi-Agent Framework: First AI Software Company powered by LLMs" },
-     { repo: "https://github.com/FSoft-AI4Code/AgileCoder", extraction: "Backward Snowballing", paper: "", description: "Incorporating Agile methodology into agents to improve code generation" },
-     { repo: "https://github.com/Gentopia-AI/Gentopia", extraction: "Backward Snowballing", paper: "", description: "a lightweight and extensible framework for LLM-based agents" },
-     { repo: "https://github.com/giorgiopiatti/GovSim", extraction: "Backward Snowballing", paper: "", description: "A  generative simulation platform designed\nto emulate governance systems" },
-     { repo: "https://github.com/HITsz-TMG/FilmAgent", extraction: "Backward Snowballing", paper: "", description: "a multi-agent collaborative framework for end-to-end film production" },
-     { repo: "https://github.com/jiangjiechen/auction-arena", extraction: "Backward Snowballing", paper: "", description: "Bidder Agent navigates through the auction with strategic reasoning" },
-     { repo: "https://github.com/jinlab-imvr/MedAgent-Pro", extraction: "Backward Snowballing", paper: "", description: "an agentic framework designed for evidence-bas..." },
-     { repo: "https://github.com/joonspk-research/generative-agents", extraction: "Backward Snowballing", paper: "", description: "generative agents—computational agents that simulate believable human behavior" },
-     { repo: "https://github.com/lapisrocks/LanguageAgentTre...", extraction: "Backward Snowballing", paper: "", description: "General framework that synergizes the capabilities of LLM agents and tree search" },
-     { repo: "https://github.com/LeapLabTHU/ExpeL", extraction: "Backward Snowballing", paper: "", description: "Agent that autonomously gathers experiences and improves performance" },
-     { repo: "https://github.com/Link-AGI/AutoAgents", extraction: "Backward Snowballing", paper: "", description: "A framework that adaptively generates and coordinates multiple agents" },
-     { repo: "https://github.com/MineDojo/Voyager", extraction: "Backward Snowballing", paper: "", description: "An Open-Ended lifelong learning Embodied Agent powered by LLMs" },
-     { repo: "https://github.com/noahshinn/reflexion", extraction: "Backward Snowballing", paper: "", description: "A novel framework to reinforce language agents with self-reflection" },
-     { repo: "https://github.com/OpenBMB/AgentVerse", extraction: "Backward Snowballing", paper: "", description: "Framework designed to facilitate the deployment of multi-agent systems" },
-     { repo: "https://github.com/OpenBMB/ChatDev", extraction: "Backward Snowballing", paper: "", description: "A chat-powered software development framework driven by multiple agents" },
+     { repo: "https://github.com/Significant-Gravitas/AutoGPT", extraction: "Backward Snowballing", paper: "", description: "A platform that allows  to create, deploy, and manage autonomous AI agents" },
+     { repo: "https://github.com/camel-ai/camel", extraction: "Backward Snowballing", paper: "CAMEL: Communicative Agents for “Mind” Exploration of Large Language Model Society", description: "The framework enables multi-agent systems to collaborate and solve tasks autonomously" },
+     { repo: "https://github.com/Codium-ai/AlphaCodium", extraction: "Backward Snowballing", paper: "Code Generation with AlphaCodium: From Prompt Engineering to Flow  Engineering", description: "a test-based, multi-stage, code-oriented iterative agentic system" },
+     { repo: "https://github.com/CraftJarvis/MC-Planner", extraction: "Backward Snowballing", paper: "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agent", description: "an agentic AI system, that performs autonomous planning in Minecraft environments" },
+     { repo: "https://github.com/FoundationAgents/MetaGPT", extraction: "Backward Snowballing", paper: "METAGPT: META PROGRAMMING FOR A  MULTI-AGENT COLLABORATIVE FRAMEWORK", description: "The Multi-Agent Framework: First AI Software Company powered by LLMs" },
+     { repo: "https://github.com/FSoft-AI4Code/AgileCoder", extraction: "Backward Snowballing", paper: "AgileCoder: Dynamic Collaborative Agents for Software Development based on Agile Methodology", description: "Incorporating Agile methodology into agents to improve code generation" },
+     { repo: "https://github.com/Gentopia-AI/Gentopia", extraction: "Backward Snowballing", paper: "Gentopia.AI : A Collaborative Platform for Tool-Augmented LLMs", description: "a lightweight and extensible framework for LLM-based agents" },
+     { repo: "https://github.com/giorgiopiatti/GovSim", extraction: "Backward Snowballing", paper: "Cooperate or Collapse: Emergence of Sustainable Cooperation in a Society of LLM Agents", description: "A  generative simulation platform designed\nto emulate governance systems" },
+     { repo: "https://github.com/HITsz-TMG/FilmAgent", extraction: "Backward Snowballing", paper: "FilmAgent: A Multi-Agent Framework for End-to-End Film Automation in Virtual 3D Spaces", description: "a multi-agent collaborative framework for end-to-end film production" },
+     { repo: "https://github.com/jiangjiechen/auction-arena", extraction: "Backward Snowballing", paper: "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena", description: "Bidder Agent navigates through the auction with strategic reasoning" },
+     { repo: "https://github.com/jinlab-imvr/MedAgent-Pro", extraction: "Backward Snowballing", paper: "MedAgent-Pro: Towards Evidence-based Multi-modal Medical Diagnosis via Reasoning Agentic Workflow", description: "an agentic framework designed for evidence-bas..." },
+     { repo: "https://github.com/joonspk-research/generative-agents", extraction: "Backward Snowballing", paper: "Generative Agents: Interactive Simulacra of Human Behavior", description: "generative agents—computational agents that simulate believable human behavior" },
+     { repo: "https://github.com/lapisrocks/LanguageAgentTreeSearch", extraction: "Backward Snowballing", paper: "Language Agent Tree Search Unifies Reasoning Acting and Planning in Language Models", description: "General framework that synergizes the capabilities of LLM agents and tree search" },
+     { repo: "https://github.com/LeapLabTHU/ExpeL", extraction: "Backward Snowballing", paper: "ExpeL: LLM Agents Are Experiential Learners", description: "Agent that autonomously gathers experiences and improves performance" },
+     { repo: "https://github.com/Link-AGI/AutoAgents", extraction: "Backward Snowballing", paper: "AutoAgents: A Framework for Automatic Agent Generation", description: "A framework that adaptively generates and coordinates multiple agents" },
+     { repo: "https://github.com/MineDojo/Voyager", extraction: "Backward Snowballing", paper: "VOYAGER: An Open-Ended Embodied Agent with Large Language Models", description: "An Open-Ended lifelong learning Embodied Agent powered by LLMs" },
+     { repo: "https://github.com/noahshinn/reflexion", extraction: "Backward Snowballing", paper: "Reflexion: Language Agents with Verbal Reinforcement Learning", description: "A novel framework to reinforce language agents with self-reflection" },
+     { repo: "https://github.com/OpenBMB/AgentVerse", extraction: "Backward Snowballing", paper: "AGENTVERSE: FACILITATING MULTI-AGENT COLLABORATION AND EXPLORING EMERGENT BEHAVIORS", description: "Framework designed to facilitate the deployment of multi-agent systems" },
+     { repo: "https://github.com/OpenBMB/ChatDev", extraction: "Backward Snowballing", paper: "ChatDev: Communicative Agents for Software Development", description: "A chat-powered software development framework driven by multiple agents" },
      { repo: "https://github.com/OpenBMB/XAgent", extraction: "Backward Snowballing", paper: "", description: "An Autonomous LLM Agent for Complex Task Solving" },
-     { repo: "https://github.com/Paitesanshi/CharacterBox", extraction: "Backward Snowballing", paper: "", description: "A dynamic, multi-agent virtual world tailor-made for character simulation" },
-     { repo: "https://github.com/PKU-Alignment/ProAgent", extraction: "Backward Snowballing", paper: "", description: "A a novel framework that harnesses large language models for agentic planning" },
-     { repo: "https://github.com/SamuelSchmidgall/AgentLaboratory", extraction: "Backward Snowballing", paper: "", description: "This framework accepts a human-provided research idea and autonomously executes experiments" },
-     { repo: "https://github.com/SMARTlab-Purdue/SMART-LLM", extraction: "Backward Snowballing", paper: "", description: "An innovative framework designed for embodied multi-agent learning" },
-     { repo: "https://github.com/TangJiakai/GenSim", extraction: "Backward Snowballing", paper: "", description: "a novel LLM-agent-based simulation platform ca..." },
-     { repo: "https://github.com/thunlp/ChatEval", extraction: "Backward Snowballing", paper: "", description: "ChatEval is designed to simplify the process o..." },
-     { repo: "https://github.com/tsukushiAI/self-organized-a...", extraction: "Backward Snowballing", paper: "", description: "Self-Organized multi-Agent framework (SoA), a ..." },
-     { repo: "https://github.com/ur-whitelab/chemcrow-public", extraction: "Backward Snowballing", paper: "", description: "LLM-based chemistry agent that integrates 18 e..." },
-     { repo: "https://github.com/weirayao/Retroformer", extraction: "Backward Snowballing", paper: "", description: "A principled framework for reinforcing large l..." },
-     { repo: "https://github.com/wekjsdvnm/Agent-Trading-Arena", extraction: "Backward Snowballing", paper: "", description: "A virtual zero-sum stock market in which LLM-b..." },
-     { repo: "https://github.com/wuhy68/ChatEDA", extraction: "Backward Snowballing", paper: "", description: "An autonomous agent for EDA empowered by an LL..." },
-     { repo: "https://github.com/xlang-ai/OpenAgents", extraction: "Backward Snowballing", paper: "", description: "An open platform for using and hosting languag..." },
-     { repo: "https://github.com/Yifan-Song793/RestGPT", extraction: "Backward Snowballing", paper: "", description: "An LLM-based autonomous agent controlling real..." },
-     { repo: "https://github.com/yoheinakajima/babyagi", extraction: "Backward Snowballing", paper: "", description: "An experimental framework for a self-building ..." },
-     { repo: "https://github.com/ysymyth/ReAct", extraction: "Backward Snowballing", paper: "", description: "Use of LLMs to generate both reasoning traces ..." }
+     { repo: "https://github.com/Paitesanshi/CharacterBox", extraction: "Backward Snowballing", paper: "CharacterBox: Evaluating the Role-Playing Capabilities of LLMs in Text-Based Virtual Worlds", description: "A dynamic, multi-agent virtual world tailor-made for character simulation" },
+     { repo: "https://github.com/PKU-Alignment/ProAgent", extraction: "Backward Snowballing", paper: "ProAgent: Building Proactive Cooperative Agents with Large Language Models", description: "A a novel framework that harnesses large language models for agentic planning" },
+     { repo: "https://github.com/SamuelSchmidgall/AgentLaboratory", extraction: "Backward Snowballing", paper: "Agent Laboratory: Using LLM Agents as Research Assistants", description: "This framework accepts a human-provided research idea and autonomously executes experiments" },
+     { repo: "https://github.com/SMARTlab-Purdue/SMART-LLM", extraction: "Backward Snowballing", paper: "SMART-LLM: Smart Multi-Agent Robot Task Planning using Large Language Models", description: "An innovative framework designed for embodied multi-agent learning" },
+     { repo: "https://github.com/TangJiakai/GenSim", extraction: "Backward Snowballing", paper: "GenSim: A General Social Simulation Platform with Large Language Model based Agents", description: "A novel LLM-agent-based simulation platform called GenSim" },
+     { repo: "https://github.com/thunlp/ChatEval", extraction: "Backward Snowballing", paper: "ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate", description: "ChatEval is designed to simplify the process of human evaluation on generated text. When given different pieces of text, roles (acted by LLMs) within ChatEval can autonomously debate the nuances and disparities, drawing upon their assigned personas, and subsequently provide their judgments" },
+     { repo: "https://github.com/tsukushiAI/self-organized-agent", extraction: "Backward Snowballing", paper: "Self-Organized Agents: A LLM Multi-Agent Framework toward Ultra Large-Scale Code Generation and Optimization", description: "Self-Organized multi-Agent framework (SoA), a novel multi-agent framework that enables the scalable and efficient generation and optimization of large-scale code." },
+     { repo: "https://github.com/ur-whitelab/chemcrow-public", extraction: "Backward Snowballing", paper: "ChemCrow: Augmenting large-language models with chemistry tools", description: "LLM-based chemistry agent that integrates 18 expert-designed tools to support complex tasks in organic synthesis, drug discovery, and materials design. " },
+     { repo: "https://github.com/weirayao/Retroformer", extraction: "Backward Snowballing", paper: "RETROFORMER: RETROSPECTIVE LARGE LANGUAGE AGENTS WITH POLICY GRADIENT OPTIMIZATION", description: "A principled framework for reinforcing large language agents by learning a retrospective model, which automatically tunes the language agent prompts from environment feedback through policy gradient" },
+     { repo: "https://github.com/wekjsdvnm/Agent-Trading-Arena", extraction: "Backward Snowballing", paper: "Agent Trading Arena: A Study on Numerical Understanding in LLM-Based Agents", description: "A virtual zero-sum stock market in which LLM-based agents engage in competitive multi-agent trading and directly impact price dynamics. By simulating realistic bid-ask interactions, our platform enables training in scenarios that closely mirror live markets, thereby narrowing the gap between training and evaluation" },
+     { repo: "https://github.com/wuhy68/ChatEDA", extraction: "Backward Snowballing", paper: "ChatEDA: A Large Language Model Powered Autonomous Agent for EDA", description: "An autonomous agent for EDA empowered by an LLM, AutoMage, complemented by EDA tools serving as executors. ChatEDA streamlines the design flow from the register-transfer level (RTL) to the graphic data system version II (GDSII) by effectively managing task decomposition, script generation, and task execution" },
+     { repo: "https://github.com/xlang-ai/OpenAgents", extraction: "Backward Snowballing", paper: "OpenAgents: An Open Platform for Language Agents in the Wild", description: "An open platform for using and hosting language agents in the wild of everyday life. OpenAgents includes three agents: (1) Data Agent for data analysis with Python/SQL and data tools; (2) Plugins Agent with 200+ daily API tools; (3) Web Agent for autonomous web browsing" },
+     { repo: "https://github.com/Yifan-Song793/RestGPT", extraction: "Backward Snowballing", paper: "RestGPT: Connecting Large Language Models with Real-World RESTful APIs", description: "An LLM-based autonomous agent controlling real-world applications via RESTful APIs" },
+     { repo: "https://github.com/yoheinakajima/babyagi", extraction: "Backward Snowballing", paper: "", description: "An experimental framework for a self-building autonomous agent" },
+     { repo: "https://github.com/ysymyth/ReAct", extraction: "Backward Snowballing", paper: "ReAct: Synergizing Reasoning and Acting in Language Models", description: "Use of LLMs to generate both reasoning traces and task-specific actions in an interleaved manner, allowing for greater synergy between the two: reasoning traces help the model induce, track, and update action plans as well as handle exceptions, while actions allow it to interface with external sources, such as knowledge bases or environments, to gather additional information." }
     ];
 
     // If you have pattern images, list them here.
@@ -233,30 +232,29 @@
   // Source: RepoList(Backward Snowballing).csv (Filtered: Agent AI only)
 
    const agentData = [
-
-     { repo: "https://github.com/bear96/GABM-Epidemic", extraction: "Backward Snowballing", paper: "", description: "development of a generative agent-based model for epidemic simulation." },
-     { repo: "https://github.com/bhargaviparanjape/language-agent-tree-search", extraction: "Backward Snowballing", paper: "", description: "a framework that uses frozen LLMs to automatically decompose problems and perform tree search reasoning." },
-     { repo: "https://github.com/bin123apple/AutoCoder", extraction: "Backward Snowballing", paper: "", description: "a code LLM trained using AIEV-INSTRUCT that excels at autonomous coding tasks." },
-     { repo: "https://github.com/epfl-dlab/cc_flows", extraction: "Backward Snowballing", paper: "", description: "Flows is a modular interaction and orchestration framework for LLM agents." },
-     { repo: "https://github.com/FloridSleeves/LLMDebugger", extraction: "Backward Snowballing", paper: "", description: "debugging framework that enables LLMs to refine their outputs autonomously." },
-     { repo: "https://github.com/FreedomIntelligence/Chain-of-Agents", extraction: "Backward Snowballing", paper: "", description: "An interpretable large language model (LLM) for multi-agent reasoning workflows." },
-     { repo: "https://github.com/gersteinlab/MedAgents", extraction: "Backward Snowballing", paper: "", description: "a novel multi-disciplinary collaboration framework for medical agents." },
-     { repo: "https://github.com/kagnlp/CodeGenerator", extraction: "Backward Snowballing", paper: "", description: "a novel multi-agent code generation framework." },
-     { repo: "https://github.com/lllindsey0615/ComposerX", extraction: "Backward Snowballing", paper: "", description: "An agent-based symbolic music generation framework." },
-     { repo: "https://github.com/LYiHub/psydraw", extraction: "Backward Snowballing", paper: "", description: "A multi-agent collaborative system based on MCTS." },
-     { repo: "https://github.com/madaan/self-refine", extraction: "Backward Snowballing", paper: "", description: "With Self-Refine, LLMs can generate feedback on their own outputs and iteratively improve them." },
-     { repo: "https://github.com/Md-Ashraful-Pramanik/MapCoder", extraction: "Backward Snowballing", paper: "", description: "Multi-Agent Code Generation for Competitive Programming." },
-     { repo: "https://github.com/MoreAgentsIsAllYouNeed/Agent", extraction: "Backward Snowballing", paper: "", description: "Experiments on multi-agent framework." },
-     { repo: "https://github.com/nec-research/meddxagent", extraction: "Backward Snowballing", paper: "", description: "A Unified Modular Agent Framework for Explainable Medical Diagnosis." },
-     { repo: "https://github.com/NEUIR/INTERVENOR", extraction: "Backward Snowballing", paper: "", description: "A system designed to emulate the interactive conversation between multiple agents." },
-     { repo: "https://github.com/nju-websoft/PairCoder", extraction: "Backward Snowballing", paper: "", description: "A Pair Programming Framework for Code Generation." },
-     { repo: "https://github.com/OpenLemur/Lemur", extraction: "Backward Snowballing", paper: "", description: "Accessible language model optimized for both natural interaction and task execution." },
-     { repo: "https://github.com/PKU-YuanGroup/ChatLaw", extraction: "Backward Snowballing", paper: "", description: "An innovative assistant that employs a Mixture-of-Agents framework for legal reasoning." },
-     { repo: "https://github.com/SalesforceAIResearch/CodeChain", extraction: "Backward Snowballing", paper: "", description: "a novel framework for inference that elicits multi-step reasoning from agents." },
-     { repo: "https://github.com/SecureAIAutonomyLab/AutoSafe", extraction: "Backward Snowballing", paper: "", description: "A multi-agent framework that leverages LLM-driven agents for safe autonomy." },
-     { repo: "https://github.com/Skytliang/Multi-Agents-Debate", extraction: "Backward Snowballing", paper: "", description: "The first work to explore Multi-Agent Debate with LLMs." },
-     { repo: "https://github.com/togethercomputer/MoA", extraction: "Backward Snowballing", paper: "", description: "System that leverages the collective strengths of multiple agents." },
-     { repo: "https://github.com/yunshiuan/llm-agent-opinion-dynamics", extraction: "Backward Snowballing", paper: "", description: "Simulation of multiagent conversations across opinion dynamics." }
+     { repo: "https://github.com/bear96/GABM-Epidemic", extraction: "Backward Snowballing", paper: "Epidemic Modeling with Generative Agents", description: "development of a generative agent-based model for epidemic simulation." },
+     { repo: "https://github.com/bhargaviparanjape/language-programmes", extraction: "Backward Snowballing", paper: "ART: Automatic multi-step reasoning and tool-use for large language models", description: "a framework that uses frozen LLMs to automatically generate intermediate reasoning steps as a program. Given a new task to solve, ART selects demonstrations of multistep reasoning and tool use from a task library" },
+     { repo: "https://github.com/bin123apple/AutoCoder", extraction: "Backward Snowballing", paper: "AutoCoder: Enhancing Code Large Language Model with AIEV-INSTRUCT", description: "a code LLM trained using AIEV-INSTRUCT that excels at autonomous coding tasks." },
+     { repo: "https://github.com/epfl-dlab/cc_flows", extraction: "Backward Snowballing", paper: "Flows: Building Blocks of Reasoning and Collaborating AI", description: "Flows is a modular interaction and orchestration framework for LLM agents." },
+     { repo: "https://github.com/FloridSleeves/LLMDebugger", extraction: "Backward Snowballing", paper: "Debug like a Human: A Large Language Model Debugger via Verifying Runtime Execution Step by Step", description: "debugging framework that enables LLMs to refine their outputs autonomously." },
+     { repo: "https://github.com/FreedomIntelligence/Chain-of-Agents", extraction: "Backward Snowballing", paper: "CoD, Towards an Interpretable Medical Agent using Chain of Diagnosis", description: "An interpretable large language model (LLM) for multi-agent reasoning workflows." },
+     { repo: "https://github.com/gersteinlab/MedAgents", extraction: "Backward Snowballing", paper: "MedAgents: Large Language Models as Collaborators for Zero-shot Medical Reasoning", description: "a novel multi-disciplinary collaboration framework for medical agents." },
+     { repo: "https://github.com/kagnlp/CodeGenerator", extraction: "Backward Snowballing", paper: "CODESIM: Multi-Agent Code Generation and Problem Solving through Simulation-Driven Planning and Debugging", description: "a novel multi-agent code generation framework." },
+     { repo: "https://github.com/lllindsey0615/ComposerX", extraction: "Backward Snowballing", paper: "COMPOSERX: MULTI-AGENT SYMBOLIC MUSIC COMPOSITION WITH LLMS", description: "An agent-based symbolic music generation framework." },
+     { repo: "https://github.com/LYiHub/psydraw", extraction: "Backward Snowballing", paper: "PsyDraw: A Multi-Agent Multimodal System for Mental Health Screening in Left-Behind Children", description: "A multi-agent collaborative system based on MCTS." },
+     { repo: "https://github.com/madaan/self-refine", extraction: "Backward Snowballing", paper: "SELF-REFINE:  Iterative Refinement with Self-Feedback", description: "With Self-Refine, LLMs can generate feedback on their own outputs and iteratively improve them." },
+     { repo: "https://github.com/Md-Ashraful-Pramanik/MapCoder", extraction: "Backward Snowballing", paper: "MapCoder: Multi-Agent Code Generation for Competitive Problem Solving", description: "Multi-Agent Code Generation for Competitive Programming." },
+     { repo: "https://github.com/MoreAgentsIsAllYouNeed/AgentForest", extraction: "Backward Snowballing", paper: "More Agents Is All You Need", description: "Experiments on multi-agent framework." },
+     { repo: "https://github.com/nec-research/meddxagent", extraction: "Backward Snowballing", paper: "MEDDxAgent: A Unified Modular Agent Framework for Explainable Automatic Differential Diagnosis", description: "A Unified Modular Agent Framework for Explainable Medical Diagnosis." },
+     { repo: "https://github.com/NEUIR/INTERVENOR", extraction: "Backward Snowballing", paper: "INTERVENOR : Prompting the Coding Ability of Large Language Models with the Interactive Chain of Repair", description: "A system designed to emulate the interactive conversation between multiple agents." },
+     { repo: "https://github.com/nju-websoft/PairCoder", extraction: "Backward Snowballing", paper: "A Pair Programming Framework for Code Generation via Multi-Plan Exploration and Feedback-Driven Refinement", description: "A Pair Programming Framework for Code Generation." },
+     { repo: "https://github.com/OpenLemur/Lemur", extraction: "Backward Snowballing", paper: "Lemur: Harmonizing Natural Language and Code for Language Agents", description: "Accessible language model optimized for both natural interaction and code execution." },
+     { repo: "https://github.com/PKU-YuanGroup/ChatLaw", extraction: "Backward Snowballing", paper: "ChatLaw: Open-Source Legal Large Language Model with Integrated External Knowledge Bases", description: "An innovative assistant that employs a Mixture-of-Agents framework for legal reasoning." },
+     { repo: "https://github.com/SalesforceAIResearch/CodeChain", extraction: "Backward Snowballing", paper: "CodeChain: Towards Modular Code Generation Through Chain of Self-revisions with Representative Sub-modules", description: "a novel framework for inference that elicits multi-step reasoning from agents." },
+     { repo: "https://github.com/SecureAIAutonomyLab/AutoSafeCoder", extraction: "Backward Snowballing", paper: "AutoSafeCoder: A Multi-Agent Framework for Securing LLM Code Generation through Static Analysis and Fuzz Testing", description: "A multi-agent framework that leverages LLM-driven agents for safe autonomy." },
+     { repo: "https://github.com/Skytliang/Multi-Agents-Debate", extraction: "Backward Snowballing", paper: "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate", description: "The first work to explore Multi-Agent Debate with LLMs." },
+     { repo: "https://github.com/togethercomputer/MoA", extraction: "Backward Snowballing", paper: "Mixture-of-Agents Enhances Large Language Model Capabilities", description: "System that leverages the collective strengths of multiple agents." },
+     { repo: "https://github.com/yunshiuan/llm-agent-opinion-dynamics", extraction: "Backward Snowballing", paper: "Simulating Opinion Dynamics with Networks of LLM-based Agents", description: "Simulation of multiagent conversations across opinion dynamics." }
     ];
 
     function shortRepoName(url) {
@@ -363,7 +361,7 @@
     }
 
     renderRepoTable("agentic-tbody", agenticData);
-    renderRepoTable("adjacent-tbody", agentData);
+    renderRepoTable("aiagents-tbody", agentData);
     renderPatternGrid();
   </script>
 </body>
