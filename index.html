@@ -151,7 +151,7 @@
     // Data ported from your current Jekyll _data/*.yml files.
     // Source: AgenticAIPatterns.github.io (_data/agentic.yml and _data/adjacent.yml)
    const agenticData = [
-     { repo: "https://github.com/google-gemini/gemini-cli", extraction: "GitHub", paper: "", description: ["Open-source AI agent that brings Google’s Gemini model into your terminal."] },
+     { repo: "https://github.com/google-gemini/gemini-cli", extraction: "GitHub", paper: "", description: ["Open-source AI agent that brings Google's Gemini model into your terminal."] },
      { repo: "https://github.com/browser-use/browser-use", extraction: "GitHub", paper: "", description: ["It is a library designed specifically to let AI agents control and automate web browsers using LLMs."] },
      { repo: "https://github.com/lobehub/lobe-chat", extraction: "GitHub", paper: "", description: ["Work-and-lifestyle framework to find, build, and collaborate with agent teammates that collaboratewith humans."] },
      { repo: "https://github.com/microsoft/autogen", extraction: "GitHub", paper: "", description: ["Framework for creating multi-agent AI applications that can act autonomously or work alongside humans."] },
@@ -223,6 +223,12 @@
      { repo: "https://github.com/ysymyth/ReAct", extraction: "Backward Snowballing", paper: "", description: "Use of LLMs to generate both reasoning traces ..." }
     ];
 
+    // If you have pattern images, list them here.
+    // Example: { title: "Retrieval", file: "retrieval.png" }
+    const patternImages = [
+      // { title: "Example category", file: "example.png" },
+    ];
+
     // Source: RepoList(Git Search).csv (non-Agentic AI, not Irrelevant)
   // Source: RepoList(Backward Snowballing).csv (Filtered: Agent AI only)
 
@@ -251,12 +257,6 @@
      { repo: "https://github.com/Skytliang/Multi-Agents-Debate", extraction: "Backward Snowballing", paper: "", description: "The first work to explore Multi-Agent Debate with LLMs." },
      { repo: "https://github.com/togethercomputer/MoA", extraction: "Backward Snowballing", paper: "", description: "System that leverages the collective strengths of multiple agents." },
      { repo: "https://github.com/yunshiuan/llm-agent-opinion-dynamics", extraction: "Backward Snowballing", paper: "", description: "Simulation of multiagent conversations across opinion dynamics." }
-    ];
-
-    // If you have pattern images, list them here.
-    // Example: { title: "Retrieval", file: "retrieval.png" }
-    const patternImages = [
-      // { title: "Example category", file: "example.png" },
     ];
 
     function shortRepoName(url) {
@@ -361,7 +361,7 @@
     }
 
     renderRepoTable("agentic-tbody", agenticData);
-    renderRepoTable("adjacent-tbody", adjacentData);
+    renderRepoTable("adjacent-tbody", agentData);
     renderPatternGrid();
   </script>
 </body>
