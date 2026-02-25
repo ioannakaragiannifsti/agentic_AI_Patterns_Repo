@@ -18,7 +18,7 @@
         <h1 class="title is-1 publication-title">Agentic & AI Agents Systems Patterns</h1>
 
         <div class="is-size-5 publication-authors" style="margin-top: 0.75rem;">
-          <span class="author-block">A lightweight catalogue of repositories and pattern categories</span>
+          <span class="author-block">An extensive catalogue of AI agents and Agentic AI repositories and pattern categories used for system agents and agentic systems</span>
         </div>
 
         <div class="publication-links" style="margin-top: 1rem;">
@@ -151,13 +151,16 @@
   <div class="modal" id="img-modal">
     <div class="modal-background" id="img-modal-bg"></div>
 
-    <div class="modal-content" style="background: white; padding: 1rem; border-radius: 10px;">
+    <div class="modal-content"
+     id="modal-content-wrapper"
+     style="background: white; padding: 1rem; border-radius: 10px; overflow: auto; max-height: 90vh;">
+
       <p class="image">
         <img
           id="img-modal-src"
           src=""
           alt=""
-          style="max-height: 85vh; object-fit: contain; background: white;"
+          style="max-height: 85vh; object-fit: contain; background: white; display: block; margin: 0 auto; cursor: grab; transition: transform 0.05s linear;"
         />
         <div class="buttons is-centered" style="margin-top: 0.75rem;">
           <button class="button is-small" id="zoom-out" type="button">Zoom Out</button>
@@ -261,7 +264,7 @@
       { title: "Context-Based", file: "Context-Based.png" },
       { title: "Coordination-Cooperation", file: "Coordination-Cooperation.png" },
       { title: "Deployment", file: "Deployment.png" },
-      { title: "Error Handling", file: "Error-Handling.png" },
+      { title: "Error Handling", file: "ErrorHandling.png" },
       { title: "Evaluation and QA", file: "EvaluationandQA.png" },
       { title: "Event Driven and Asynchronous", file: "EventDrivenAsynch.png" },
       { title: "Explainability and Transparency", file: "ExplainabilityandTransparency.png" },
@@ -373,10 +376,16 @@
     }
     
     let zoomScale = 1;
+    let isDragging = false;
+    let startX, startY;
+    let currentX = 0;
+    let currentY = 0;
+
 
     function applyZoom() {
       const imgEl = document.getElementById("img-modal-src");
-      imgEl.style.transform = `scale(${zoomScale})`;
+      imgEl.style.transform = `translate(${currentX}px, ${currentY}px) scale(${zoomScale})`;
+      imgEl.style.transformOrigin = "center center";
     }
 
     function openImageModal(src, title, desc) {
@@ -384,6 +393,8 @@
       const imgEl = document.getElementById("img-modal-src");
       const titleEl = document.getElementById("img-modal-title");
       const descEl = document.getElementById("img-modal-desc");
+      currentX = 0;
+      currentY = 0;
 
       imgEl.src = src;
       zoomScale = 1;
@@ -465,17 +476,41 @@
       document.getElementById("img-modal-bg").addEventListener("click", closeImageModal);
         zoomScale = Math.min(zoomScale + 0.2, 5);
         applyZoom();
+        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
       });
       document.getElementById("zoom-out").addEventListener("click", () => {
         zoomScale = Math.max(zoomScale - 0.2, 0.2);
         applyZoom();
+        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
       });
       document.getElementById("zoom-reset").addEventListener("click", () => {
         zoomScale = 1;
         applyZoom();
+        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
       });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeImageModal();
+      });
+
+      const imgEl = document.getElementById("img-modal-src");
+      imgEl.addEventListener("mousedown", (e) => {
+        if (zoomScale <=1) return; 
+        isDragging = true;
+        imgEl.style.cursor = "grabbing";
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        currentX = e.clientX - startX;
+        currentY = e.clientY - startY;
+        applyZoom();
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+        imgEl.style.cursor = zoomScale > 1 ? "grab": "default";
       });
 
       renderRepoTable("agentic-tbody", agenticData);
