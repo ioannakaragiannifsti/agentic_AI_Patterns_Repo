@@ -152,22 +152,27 @@
     <div class="modal-background" id="img-modal-bg"></div>
 
     <div class="modal-content"
-     id="modal-content-wrapper"
-     style="background: white; padding: 1rem; border-radius: 10px; overflow: auto; max-height: 90vh;">
+      id="modal-content-wrapper"
+      style="background: white; padding: 1rem; border-radius: 10px; max-height: 90vh;">
 
-      <p class="image">
+      <!-- Pan container: scroll-based panning (smooth) -->
+      <div
+        id="pan-container"
+        style="background: white; overflow: auto; max-height: 85vh; border-radius: 10px; padding: 0.5rem;"
+      >
         <img
           id="img-modal-src"
           src=""
           alt=""
-          style="max-height: 85vh; object-fit: contain; background: white; display: block; margin: 0 auto; cursor: grab; transition: transform 0.05s linear;"
+          style="display: block; margin: 0 auto; background: white; object-fit: contain; transform: scale(1); transform-origin: top left; cursor: default; user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto;"
         />
-        <div class="buttons is-centered" style="margin-top: 0.75rem;">
-          <button class="button is-small" id="zoom-out" type="button">Zoom Out</button>
-          <button class="button is-small" id="zoom-reset" type="button">Reset</button>
-          <button class="button is-small" id="zoom-in" type="button">Zoom in</button>
-        </div>
-      </p>
+      </div>
+
+      <div class="buttons is-centered" style="margin-top: 0.75rem;">
+        <button class="button is-small" id="zoom-out" type="button">Zoom Out</button>
+        <button class="button is-small" id="zoom-reset" type="button">Reset</button>
+        <button class="button is-small" id="zoom-in" type="button">Zoom in</button>
+      </div>
 
       <div class="box" style="margin-top: 0.75rem;">
         <p class="title is-6" id="img-modal-title" style="margin-bottom: 0.25rem;"></p>
@@ -374,18 +379,13 @@
         tbody.appendChild(tr);
       }
     }
-    
-    let zoomScale = 1;
-    let isDragging = false;
-    let startX, startY;
-    let currentX = 0;
-    let currentY = 0;
 
+    let zoomScale = 1;
 
     function applyZoom() {
       const imgEl = document.getElementById("img-modal-src");
-      imgEl.style.transform = `translate(${currentX}px, ${currentY}px) scale(${zoomScale})`;
-      imgEl.style.transformOrigin = "center center";
+      imgEl.style.transform = `scale(${zoomScale})`;
+      imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
     }
 
     function openImageModal(src, title, desc) {
@@ -393,16 +393,17 @@
       const imgEl = document.getElementById("img-modal-src");
       const titleEl = document.getElementById("img-modal-title");
       const descEl = document.getElementById("img-modal-desc");
-      currentX = 0;
-      currentY = 0;
+      const pan = document.getElementById("pan-container");
 
       imgEl.src = src;
-      zoomScale = 1;
-      imgEl.style.transform = "scale(1)";
-      imgEl.style.transformOrigin = "center center";
       imgEl.alt = title || "";
       titleEl.textContent = title || "";
       descEl.textContent = desc || "";
+
+      zoomScale = 1;
+      applyZoom();
+      pan.scrollLeft = 0;
+      pan.scrollTop = 0;
 
       modal.classList.add("is-active");
     }
@@ -469,48 +470,66 @@
       }
     }
 
-    // Run after DOM is ready so modal elements exist
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("zoom-in").addEventListener("click", () => {
+      const imgEl = document.getElementById("img-modal-src");
+      const pan = document.getElementById("pan-container");
+
       document.getElementById("img-modal-close").addEventListener("click", closeImageModal);
       document.getElementById("img-modal-bg").addEventListener("click", closeImageModal);
-        zoomScale = Math.min(zoomScale + 0.2, 5);
-        applyZoom();
-        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
-      });
-      document.getElementById("zoom-out").addEventListener("click", () => {
-        zoomScale = Math.max(zoomScale - 0.2, 0.2);
-        applyZoom();
-        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
-      });
-      document.getElementById("zoom-reset").addEventListener("click", () => {
-        zoomScale = 1;
-        applyZoom();
-        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
-      });
+
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeImageModal();
       });
 
-      const imgEl = document.getElementById("img-modal-src");
-      imgEl.addEventListener("mousedown", (e) => {
-        if (zoomScale <=1) return; 
-        isDragging = true;
-        imgEl.style.cursor = "grabbing";
-        startX = e.clientX - currentX;
-        startY = e.clientY - currentY;
-      });
-
-      document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        currentX = e.clientX - startX;
-        currentY = e.clientY - startY;
+      document.getElementById("zoom-in").addEventListener("click", () => {
+        zoomScale = Math.min(zoomScale + 0.2, 5);
         applyZoom();
       });
 
+      document.getElementById("zoom-out").addEventListener("click", () => {
+        zoomScale = Math.max(zoomScale - 0.2, 1);
+        applyZoom();
+      });
+
+      document.getElementById("zoom-reset").addEventListener("click", () => {
+        zoomScale = 1;
+        applyZoom();
+        pan.scrollLeft = 0;
+        pan.scrollTop = 0;
+      });
+
+      // Smooth drag-to-pan by scrolling the container
+      let isDown = false;
+      let startX = 0, startY = 0;
+      let scrollLeft = 0, scrollTop = 0;
+
+      imgEl.addEventListener("mousedown", (e) => {
+        if (zoomScale <= 1) return;
+        e.preventDefault();
+
+        isDown = true;
+        imgEl.style.cursor = "grabbing";
+
+        startX = e.clientX;
+        startY = e.clientY;
+        scrollLeft = pan.scrollLeft;
+        scrollTop = pan.scrollTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        pan.scrollLeft = scrollLeft - dx;
+        pan.scrollTop = scrollTop - dy;
+      });
+
       document.addEventListener("mouseup", () => {
-        isDragging = false;
-        imgEl.style.cursor = zoomScale > 1 ? "grab": "default";
+        if (!isDown) return;
+        isDown = false;
+        imgEl.style.cursor = zoomScale > 1 ? "grab" : "default";
       });
 
       renderRepoTable("agentic-tbody", agenticData);
