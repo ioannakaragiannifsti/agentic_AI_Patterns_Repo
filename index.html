@@ -159,6 +159,11 @@
           alt=""
           style="max-height: 85vh; object-fit: contain; background: white;"
         />
+        <div class="buttons is-centered" style="margin-top: 0.75rem;">
+          <button class="button is-small" id="zoom-out" type="button">Zoom Out</button>
+          <button class="button is-small" id="zoom-reset" type="button">Reset</button>
+          <button class="button is-small" id="zoom-in" type="button">Zoom in</button>
+        </div>
       </p>
 
       <div class="box" style="margin-top: 0.75rem;">
@@ -366,6 +371,13 @@
         tbody.appendChild(tr);
       }
     }
+    
+    let zoomScale = 1;
+
+    function applyZoom() {
+      const imgEl = document.getElementById("img-modal-src");
+      imgEl.style.transform = `scale(${zoomScale})`;
+    }
 
     function openImageModal(src, title, desc) {
       const modal = document.getElementById("img-modal");
@@ -374,6 +386,9 @@
       const descEl = document.getElementById("img-modal-desc");
 
       imgEl.src = src;
+      zoomScale = 1;
+      imgEl.style.transform = "scale(1)";
+      imgEl.style.transformOrigin = "center center";
       imgEl.alt = title || "";
       titleEl.textContent = title || "";
       descEl.textContent = desc || "";
@@ -445,9 +460,20 @@
 
     // Run after DOM is ready so modal elements exist
     document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("zoom-in").addEventListener("click", () => {
       document.getElementById("img-modal-close").addEventListener("click", closeImageModal);
       document.getElementById("img-modal-bg").addEventListener("click", closeImageModal);
-
+        zoomScale = Math.min(zoomScale + 0.2, 5);
+        applyZoom();
+      });
+      document.getElementById("zoom-out").addEventListener("click", () => {
+        zoomScale = Math.max(zoomScale - 0.2, 0.2);
+        applyZoom();
+      });
+      document.getElementById("zoom-reset").addEventListener("click", () => {
+        zoomScale = 1;
+        applyZoom();
+      });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeImageModal();
       });
