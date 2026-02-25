@@ -147,6 +147,29 @@
     </div>
   </footer>
 
+  <!-- Modal must exist BEFORE the script wires up event listeners -->
+  <div class="modal" id="img-modal">
+    <div class="modal-background" id="img-modal-bg"></div>
+
+    <div class="modal-content">
+      <p class="image">
+        <img
+          id="img-modal-src"
+          src=""
+          alt=""
+          style="max-height: 85vh; object-fit: contain;"
+        />
+      </p>
+
+      <div class="box" style="margin-top: 0.75rem;">
+        <p class="title is-6" id="img-modal-title" style="margin-bottom: 0.25rem;"></p>
+        <p class="content is-size-7" id="img-modal-desc" style="margin-bottom: 0;"></p>
+      </div>
+    </div>
+
+    <button class="modal-close is-large" aria-label="close" id="img-modal-close"></button>
+  </div>
+
   <script>
     // Data ported from your current Jekyll _data/*.yml files.
    const agenticData = [
@@ -192,7 +215,7 @@
      { repo: "https://github.com/FoundationAgents/MetaGPT", extraction: "Backward Snowballing", paper: "METAGPT: META PROGRAMMING FOR A  MULTI-AGENT COLLABORATIVE FRAMEWORK", description: "The Multi-Agent Framework: First AI Software Company powered by LLMs" },
      { repo: "https://github.com/FSoft-AI4Code/AgileCoder", extraction: "Backward Snowballing", paper: "AgileCoder: Dynamic Collaborative Agents for Software Development based on Agile Methodology", description: "Incorporating Agile methodology into agents to improve code generation" },
      { repo: "https://github.com/Gentopia-AI/Gentopia", extraction: "Backward Snowballing", paper: "Gentopia.AI : A Collaborative Platform for Tool-Augmented LLMs", description: "a lightweight and extensible framework for LLM-based agents" },
-     { repo: "https://github.com/giorgiopiatti/GovSim", extraction: "Backward Snowballing", paper: "Cooperate or Collapse: Emergence of Sustainable Cooperation in a Society of LLM Agents", description: "A  generative simulation platform designed\nto emulate governance systems" },
+     { repo: "https://github.com/giorgiopiatti/GovSim", extraction: "Backward Snowballing", paper: "Cooperate or Collapse: Emergence of Sustainable Cooperation in a Society of LLM Agents", description: "A  generative simulation platform designed\n\tto emulate governance systems" },
      { repo: "https://github.com/HITsz-TMG/FilmAgent", extraction: "Backward Snowballing", paper: "FilmAgent: A Multi-Agent Framework for End-to-End Film Automation in Virtual 3D Spaces", description: "a multi-agent collaborative framework for end-to-end film production" },
      { repo: "https://github.com/jiangjiechen/auction-arena", extraction: "Backward Snowballing", paper: "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena", description: "Bidder Agent navigates through the auction with strategic reasoning" },
      { repo: "https://github.com/jinlab-imvr/MedAgent-Pro", extraction: "Backward Snowballing", paper: "MedAgent-Pro: Towards Evidence-based Multi-modal Medical Diagnosis via Reasoning Agentic Workflow", description: "an agentic framework designed for evidence-bas..." },
@@ -263,13 +286,7 @@
       { title: "Storage and Retrieval", file: "StorageandRetrieval.png" },
       { title: "Tool Use", file: "ToolUse.png" },
       { title: "Workflow", file: "Workflow.png" },
-      
-     
-
     ];
-
-    // Source: RepoList(Git Search).csv (non-Agentic AI, not Irrelevant)
-  // Source: RepoList(Backward Snowballing).csv (Filtered: Agent AI only)
 
    const agentData = [
      { repo: "https://github.com/bear96/GABM-Epidemic", extraction: "Backward Snowballing", paper: "Epidemic Modeling with Generative Agents", description: "development of a generative agent-based model for epidemic simulation." },
@@ -361,18 +378,12 @@
       titleEl.textContent = title || "";
       descEl.textContent = desc || "";
 
-     modal.classList.add("is-active");
+      modal.classList.add("is-active");
     }
 
     function closeImageModal() {
       document.getElementById("img-modal").classList.remove("is-active");
     }
-
-    document.getElementById("img-modal-close").addEventListener("click", closeImageModal);
-    document.getElementById("img-modal-bg").addEventListener("click", closeImageModal);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeImageModal();
-   });
 
     function renderPatternGrid() {
       const grid = document.getElementById("pattern-grid");
@@ -407,6 +418,7 @@
 
         const cardContent = document.createElement("div");
         cardContent.className = "card-content";
+
         const title = document.createElement("p");
         title.className = "title is-6";
         title.textContent = p.title || p.file;
@@ -431,30 +443,19 @@
       }
     }
 
-    renderRepoTable("agentic-tbody", agenticData);
-    renderRepoTable("aiagents-tbody", agentData);
-    renderPatternGrid();
+    // Run after DOM is ready so modal elements exist
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("img-modal-close").addEventListener("click", closeImageModal);
+      document.getElementById("img-modal-bg").addEventListener("click", closeImageModal);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeImageModal();
+      });
+
+      renderRepoTable("agentic-tbody", agenticData);
+      renderRepoTable("aiagents-tbody", agentData);
+      renderPatternGrid();
+    });
   </script>
-  <div class="modal" id="img-modal">
-  <div class="modal-background" id="img-modal-bg"></div>
-
-  <div class="modal-content">
-    <p class="image">
-      <img
-        id="img-modal-src"
-        src=""
-        alt=""
-        style="max-height: 85vh; object-fit: contain;"
-      />
-    </p>
-
-    <div class="box" style="margin-top: 0.75rem;">
-      <p class="title is-6" id="img-modal-title" style="margin-bottom: 0.25rem;"></p>
-      <p class="content is-size-7" id="img-modal-desc" style="margin-bottom: 0;"></p>
-    </div>
-  </div>
-
-  <button class="modal-close is-large" aria-label="close" id="img-modal-close"></button>
-</div>
 </body>
 </html>
